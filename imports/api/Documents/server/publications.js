@@ -6,6 +6,10 @@ Meteor.publish('documents', function documents() {
   return Documents.find({ owner: this.userId });
 });
 
+Meteor.publish('gifs', function documents() {
+  return Documents.find({ owner: this.userId });
+});
+
 // Note: documents.view is also used when editing an existing document.
 Meteor.publish('documents.view', function documentsView(documentId) {
   check(documentId, String);

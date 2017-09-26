@@ -15,16 +15,10 @@ class DocumentEditor extends React.Component {
         title: {
           required: true,
         },
-        body: {
-          required: true,
-        },
       },
       messages: {
         title: {
           required: 'Need a title in here, Seuss.',
-        },
-        body: {
-          required: 'This thneeds a body, please.',
         },
       },
       submitHandler() { component.handleSubmit(); },
@@ -37,7 +31,6 @@ class DocumentEditor extends React.Component {
     const methodToCall = existingDocument ? 'documents.update' : 'documents.insert';
     const doc = {
       title: this.title.value.trim(),
-      body: this.body.value.trim(),
     };
 
     if (existingDocument) doc._id = existingDocument;
@@ -58,7 +51,7 @@ class DocumentEditor extends React.Component {
     const { doc } = this.props;
     return (<form ref={form => (this.form = form)} onSubmit={event => event.preventDefault()}>
       <FormGroup>
-        <ControlLabel>Title</ControlLabel>
+        <ControlLabel>Gif Url</ControlLabel>
         <input
           type="text"
           className="form-control"
@@ -68,25 +61,15 @@ class DocumentEditor extends React.Component {
           placeholder="Oh, The Places You'll Go!"
         />
       </FormGroup>
-      <FormGroup>
-        <ControlLabel>Body</ControlLabel>
-        <textarea
-          className="form-control"
-          name="body"
-          ref={body => (this.body = body)}
-          defaultValue={doc && doc.body}
-          placeholder="Congratulations! Today is your day. You're off to Great Places! You're off and away!"
-        />
-      </FormGroup>
       <Button type="submit" bsStyle="success">
-        {doc && doc._id ? 'Save Changes' : 'Add Document'}
+        {doc && doc._id ? 'Save Changes' : 'Add Gif'}
       </Button>
     </form>);
   }
 }
 
 DocumentEditor.defaultProps = {
-  doc: { title: '', body: '' },
+  doc: { title: '' },
 };
 
 DocumentEditor.propTypes = {

@@ -49,6 +49,7 @@ const App = props => (
       <Grid>
         <Switch>
           <Route exact name="index" path="/" component={Index} />
+          <Authenticated exact path="/gifs" component={Documents} {...props} />
           <Authenticated exact path="/documents" component={Documents} {...props} />
           <Authenticated exact path="/documents/new" component={NewDocument} {...props} />
           <Authenticated exact path="/documents/:_id" component={ViewDocument} {...props} />
