@@ -10,10 +10,17 @@ const copyrightYear = () => {
   return currentYear === '2017' ? '2017' : `2017-${currentYear}`;
 };
 
+const getCopyrightStatement = () => {
+  const newDate = new Date()
+  const name = `Pablo M.`
+  const copyrightStatement = `${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()} -- ${name}`
+  return copyrightStatement
+}
+
 const Footer = () => (
   <div className="Footer">
     <Grid>
-      <p className="pull-left">&copy; {copyrightYear()} Vaultoro</p>
+      <p className="pull-left">&copy; {getCopyrightStatement()}</p>
       <ul className="pull-right">
         <li><Link to="/terms">Terms<span className="hidden-xs"> of Service</span></Link></li>
         <li><Link to="/privacy">Privacy<span className="hidden-xs"> Policy</span></Link></li>
