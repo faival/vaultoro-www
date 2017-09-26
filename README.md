@@ -1,5 +1,5 @@
-### Pup
-A boilerplate for products.
+### Vaultoro
+The future website of Vaultoro
 
 [Read the Documentation](http://cleverbeagle.com/pup)
 
