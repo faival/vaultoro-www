@@ -13,7 +13,9 @@ import Authenticated from '../../components/Authenticated/Authenticated';
 import Public from '../../components/Public/Public';
 import Index from '../../pages/Index/Index';
 import Documents from '../../pages/Documents/Documents';
+import Youtube from '../../pages/Youtube/Youtube';
 import NewDocument from '../../pages/NewDocument/NewDocument';
+import NewYoutube from '../../pages/NewYoutube/NewYoutube';
 import ViewDocument from '../../pages/ViewDocument/ViewDocument';
 import EditDocument from '../../pages/EditDocument/EditDocument';
 import Signup from '../../pages/Signup/Signup';
@@ -50,6 +52,9 @@ const App = props => (
         <Switch>
           <Route exact name="index" path="/" component={Index} />
           <Authenticated exact path="/gifs" component={Documents} {...props} />
+          <Authenticated exact path="/youtube" component={Youtube} {...props} />
+          <Authenticated exact path="/youtube/new" component={NewYoutube} {...props} />
+          <Authenticated exact path="/youtube/:_id" component={ViewDocument} {...props} />
           <Authenticated exact path="/documents" component={Documents} {...props} />
           <Authenticated exact path="/documents/new" component={NewDocument} {...props} />
           <Authenticated exact path="/documents/:_id" component={ViewDocument} {...props} />

@@ -1,5 +1,7 @@
 import '../../api/Documents/methods';
 import '../../api/Documents/server/publications';
+import '../../api/Youtube/methods';
+import '../../api/Youtube/server/publications';
 
 import '../../api/OAuth/server/methods';
 
