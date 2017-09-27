@@ -40,15 +40,16 @@ const Documents = ({ loading, documents, match, history }) => (!loading ? (
         </tr>
       </thead>
       <tbody>
-        {documents.map(({ _id, title, createdAt, updatedAt }) => (
+        {documents.map(({ _id, title, rating, createdAt, updatedAt }) => (
           <tr key={_id}>
             <td><img src={title} /></td>
+            <td>{rating}</td>
             <td>{timeago(updatedAt)}</td>
             <td>{monthDayYearAtTime(createdAt)}</td>
             <td>
               <Button
                 bsStyle="primary"
-                onClick={() => history.push(`${match.url}/${_id}`)}
+                onClick={() => history.push(`documents/${_id}`)}
                 block
               >View</Button>
             </td>

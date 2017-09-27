@@ -5,14 +5,18 @@ import rateLimit from '../../modules/rate-limit';
 
 Meteor.methods({
   'documents.insert': function documentsInsert(doc) {
+    console.log(doc)
     check(doc, {
       title: String,
       body: String,
+      rating: Number,
     });
 
     try {
       return Documents.insert({ owner: this.userId, ...doc });
     } catch (exception) {
+
+      console.log(exception)
       throw new Meteor.Error('500', exception);
     }
   },
@@ -21,6 +25,7 @@ Meteor.methods({
       _id: String,
       title: String,
       body: String,
+      rating: Number,
     });
 
     try {

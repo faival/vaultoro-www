@@ -44,6 +44,10 @@ Documents.schema = new SimpleSchema({
     type: String,
     label: 'The body of the document.',
   },
+  rating: {
+    type: Number,
+    label: 'Rating',
+  },
 });
 
 Documents.attachSchema(Documents.schema);

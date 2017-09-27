@@ -15,10 +15,16 @@ class DocumentEditor extends React.Component {
         title: {
           required: true,
         },
+        rating: {
+          required: true,
+        },
       },
       messages: {
         title: {
           required: 'Need a title in here, Seuss.',
+        },
+        rating: {
+          required: 'Need a rating in here, Seuss.',
         },
       },
       submitHandler() { component.handleSubmit(); },
@@ -31,6 +37,8 @@ class DocumentEditor extends React.Component {
     const methodToCall = existingDocument ? 'documents.update' : 'documents.insert';
     const doc = {
       title: this.title.value.trim(),
+      body: 'any',
+      rating: parseInt(this.rating.value.trim(), 10)
     };
 
     if (existingDocument) doc._id = existingDocument;
@@ -39,7 +47,7 @@ class DocumentEditor extends React.Component {
       if (error) {
         Bert.alert(error.reason, 'danger');
       } else {
-        const confirmation = existingDocument ? 'Document updated!' : 'Document added!';
+        const confirmation = existingDocument ? 'Gif updated!' : 'Gif added!';
         this.form.reset();
         Bert.alert(confirmation, 'success');
         history.push(`/documents/${documentId}`);
@@ -60,6 +68,20 @@ class DocumentEditor extends React.Component {
           defaultValue={doc && doc.title}
           placeholder="Oh, The Places You'll Go!"
         />
+      </FormGroup>
+      <FormGroup>
+        <ControlLabel>Gif Url</ControlLabel>
+        <select
+          className="form-control"
+          name="title"
+          ref={rating => (this.rating = rating)}
+          defaultValue={doc && doc.rating}
+          placeholder="Rating"
+        >
+        {
+          [0, 1, 2, 3, 4].map(rating=> (<option value={rating}>{rating + 1}</option>))
+        }
+        </select>
       </FormGroup>
       <Button type="submit" bsStyle="success">
         {doc && doc._id ? 'Save Changes' : 'Add Gif'}
