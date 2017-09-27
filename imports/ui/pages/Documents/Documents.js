@@ -23,6 +23,18 @@ const handleRemove = (documentId) => {
   }
 };
 
+const getDecryptedTitle = (titleEncrypted) => {
+  const titleDecrypted = CryptoJS.AES.decrypt(titleEncrypted, Session.get('passphrase'));
+
+  if (titleEncrypted.indexOf('http') > -1) {
+    return titleEncrypted;
+  }
+  console.log(titleDecrypted.toString(CryptoJS.enc.Utf8))
+
+
+  return titleDecrypted.toString(CryptoJS.enc.Utf8);
+}
+
 const Documents = ({ loading, documents, match, history }) => (!loading ? (
   <div className="Documents">
     <div className="page-header clearfix">
@@ -42,7 +54,7 @@ const Documents = ({ loading, documents, match, history }) => (!loading ? (
       <tbody>
         {documents.map(({ _id, title, rating, createdAt, updatedAt }) => (
           <tr key={_id}>
-            <td><img src={title} /></td>
+            <td><img src={getDecryptedTitle(title)} /></td>
 
             <td>{[...Array(rating)].map((rating, index) => (<Glyphicon key={index} glyph="star"/>))}</td>
             <td>{timeago(updatedAt)}</td>

@@ -41,6 +41,10 @@ class YoutubeEditor extends React.Component {
       rating: parseInt(this.rating.value.trim(), 10)
     };
 
+    const encryptedTitle = CryptoJS.AES.encrypt(doc.title, Session.get('passphrase')).toString();
+    delete doc.title 
+    doc.title = encryptedTitle
+
     if (existingDocument) doc._id = existingDocument;
 
     Meteor.call(methodToCall, doc, (error, documentId) => {

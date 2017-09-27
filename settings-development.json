@@ -1,5 +1,7 @@
 {
-  "public": {},
+  "public": {
+    "clientSessionEncriptionKey": "FT85lDvDZjN+aiOs1SeBPQ=="
+  },
   "private": {
     "MAIL_URL": "",
     "OAuth": {

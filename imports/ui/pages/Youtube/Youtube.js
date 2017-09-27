@@ -33,6 +33,18 @@ const getVideoIdFromUrl = (url) => {
   return url.split(`v=`)[1]
 }
 
+const getDecryptedTitle = (titleEncrypted) => {
+
+  const titleDecrypted = CryptoJS.AES.decrypt(titleEncrypted, Session.get('passphrase'));
+
+  if (titleEncrypted.indexOf('http') > -1) {
+    return titleEncrypted;
+  }
+  console.log(titleDecrypted.toString(CryptoJS.enc.Utf8))
+  
+  return titleDecrypted.toString(CryptoJS.enc.Utf8);
+}
+
 const Youtube = ({ loading, youtubes, match, history }) => (!loading ? (
   <div className="Youtube">
     <div className="page-header clearfix">
@@ -54,7 +66,7 @@ const Youtube = ({ loading, youtubes, match, history }) => (!loading ? (
           <tr key={_id}>
             <td>
               <YouTube
-                videoId={getVideoIdFromUrl(title)}
+                videoId={getVideoIdFromUrl(getDecryptedTitle(title))}
                 opts={ytOpts}
               />
             </td>
