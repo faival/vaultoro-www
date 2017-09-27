@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Table, Alert, Button } from 'react-bootstrap';
+import { Table, Alert, Button, Glyphicon } from 'react-bootstrap';
 import { timeago, monthDayYearAtTime } from '@cleverbeagle/dates';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
@@ -43,7 +43,8 @@ const Documents = ({ loading, documents, match, history }) => (!loading ? (
         {documents.map(({ _id, title, rating, createdAt, updatedAt }) => (
           <tr key={_id}>
             <td><img src={title} /></td>
-            <td>{rating}</td>
+
+            <td>{[...Array(rating)].map((rating, index) => (<Glyphicon key={index} glyph="star"/>))}</td>
             <td>{timeago(updatedAt)}</td>
             <td>{monthDayYearAtTime(createdAt)}</td>
             <td>
@@ -78,6 +79,6 @@ export default createContainer(() => {
   const subscription = Meteor.subscribe('documents');
   return {
     loading: !subscription.ready(),
-    documents: DocumentsCollection.find().fetch(),
+    documents: DocumentsCollection.find().fetch().sort((gif, nextGif) => { return (!gif.rating || gif.rating < nextGif.rating )}),
   };
 }, Documents);
